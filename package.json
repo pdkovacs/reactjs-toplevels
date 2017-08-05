@@ -1,0 +1,53 @@
+{
+  "name": "reactjs-toplevels",
+  "version": "0.0.1",
+  "description": "A mechanism to display toplevel components such as context menus, modal dialogue boxes and (non-modal) informational or error message popups.",
+  "main": "index.js",
+  "scripts": {
+    "dist": "rimraf dist && cross-env NODE_ENV=production webpack && copyfiles index.html dist/",
+    "dev": "rimraf dist && mkdir dist && cp index.html dist/ && cross-env NODE_ENV=development node dev-server.js",
+    "pretest": "rimraf dist && cross-env NODE_ENV=test webpack",
+    "test": "cross-env NODE_ENV=test JASMINE_CONFIG_PATH=test/jasmine-config.json jasmine dist/bundle.js"
+  },
+  "author": "peter.dunay.kovacs@gmail.com",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/flux": "^3.0.1",
+    "@types/immutable": "^3.8.7",
+    "@types/jasmine": "^2.5.47",
+    "@types/lodash": "^4.14.58",
+    "@types/node": "^7.0.10",
+    "@types/react": "^15.0.36",
+    "@types/react-addons-test-utils": "^0.14.18",
+    "@types/react-dom": "^15.5.1",
+    "@types/webpack": "^2.2.12",
+    "@types/webpack-env": "^1.13.0",
+    "awesome-typescript-loader": "^3.1.2",
+    "copyfiles": "^1.2.0",
+    "cross-env": "^5.0.1",
+    "css-loader": "^0.27.3",
+    "extract-text-webpack-plugin": "^2.1.0",
+    "jasmine": "^2.5.3",
+    "jsdom": "^9.12.0",
+    "react-addons-test-utils": "^15.6.0",
+    "rimraf": "^2.6.1",
+    "simple-webpack-boilerplate": "^1.0.3",
+    "source-map-loader": "^0.2.0",
+    "style-loader": "^0.14.1",
+    "typescript": "^2.2.1",
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.4.2",
+    "webpack-node-externals": "^1.5.4"
+  },
+  "dependencies": {
+    "@types/rx": "^4.1.1",
+    "flux": "^3.1.2",
+    "immutable": "^3.8.1",
+    "lodash": "^4.17.4",
+    "normalize.css": "^5.0.0",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "rx": "^4.1.0",
+    "whatwg-fetch": "^2.0.3"
+  }
+}
