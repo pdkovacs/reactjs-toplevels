@@ -1,5 +1,7 @@
 const path = require('path');
 require('webpack');
+const HTMLWebpackPlugin = require('html-webpack-plugin');
+
 // const DEVELOPMENT = process.env.NODE_ENV === 'development';
 const TEST = process.env.NODE_ENV === 'test';
 const PRODUCTION = process.env.NODE_ENV === 'production';
@@ -10,7 +12,24 @@ const entry = PRODUCTION
     ? [ './src/index.tsx' ]
     : TEST
     ? [ './test/specRoot.js' ]
-    : [ './src/index.tsx', 'webpack-dev-server/client?http://localhost:8080' ];
+    : [ // DEVELOPMENT
+        './src/index.tsx',
+        'webpack-dev-server/client?http://localhost:8080'
+    ];
+
+const plugins = PRODUCTION
+    ? [
+            new HTMLWebpackPlugin({
+				template: 'index-prod-template.html'
+			})
+    ]
+    : TEST
+    ? []
+    : [ // DEVELOPMENT
+            new HTMLWebpackPlugin({
+				template: 'index-dev-template.html'
+			})
+    ]
 
 const cssIdentifier = '[path][name]---[local]';
 
@@ -32,6 +51,7 @@ const typeScriptConfigFileName = TEST
 module.exports = {
     devtool: 'source-map',
     entry: entry,
+    plugins: plugins,
     resolve: {
         alias: {
             src: path.resolve(__dirname, 'src')

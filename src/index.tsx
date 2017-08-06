@@ -3,6 +3,7 @@ import 'normalize.css';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
+import { App } from './app/App';
 import { TableHeaderContextButton } from './toplevel/views/TableHeaderContextButton';
 
 ReactDOM.render(
@@ -12,5 +13,5 @@ ReactDOM.render(
 
 ReactDOM.render(
     <TableHeaderContextButton show = {false} position = {{x: 0, y: 0}}/>,
-    document.getElementById('toplevel')
+    document.getElementById('toplevels')
 )
