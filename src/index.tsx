@@ -4,7 +4,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
 import { App } from './app/App';
-import { TableHeaderContextButton } from './toplevel/views/TableHeaderContextButton';
+import TableHeaderContextMenuContainer from './toplevel/containers/TableHeaderContextMenuContainer';
 
 ReactDOM.render(
     <App />,
@@ -12,6 +12,6 @@ ReactDOM.render(
 );
 
 ReactDOM.render(
-    <TableHeaderContextButton show = {false} position = {{x: 0, y: 0}}/>,
+    <TableHeaderContextMenuContainer />,
     document.getElementById('toplevels')
 )

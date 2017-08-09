@@ -6,9 +6,11 @@ import {
     ToplevelPosition,
     ToplevelAction,
     ToplevelActionType } from './ToplevelActionType';
-import { ToplevelDispatcher } from './ToplevelDispatcher';
+
+import dispatcher from './ToplevelDispatcher';
 
 export interface ToplevelComponentState {
+    src  : HTMLElement;
     show : boolean;
     position: ToplevelPosition;
 }
@@ -16,9 +18,9 @@ export interface ToplevelComponentState {
 export class ToplevelStoreState {
     private componentTypeStates : Map<ToplevelComponentType, ToplevelComponentState> = Map();
 
-    constructor (portalStates : Map<ToplevelComponentType, ToplevelComponentState>) {
-        if (portalStates !== null) {
-            this.componentTypeStates = portalStates;
+    constructor (componentTypeStates : Map<ToplevelComponentType, ToplevelComponentState>) {
+        if (componentTypeStates !== null) {
+            this.componentTypeStates = componentTypeStates;
         }
     }
 
@@ -31,9 +33,7 @@ export class ToplevelStoreState {
     }
 }
 
-export class ToplevelStore extends ReduceStore<ToplevelStoreState, ToplevelAction> {
-
-    private static instance : ToplevelStore = new ToplevelStore(ToplevelDispatcher.getInstance());
+class ToplevelStore extends ReduceStore<ToplevelStoreState, ToplevelAction> {
 
     public getInitialState() : ToplevelStoreState {
         return new ToplevelStoreState(null);
@@ -41,16 +41,16 @@ export class ToplevelStore extends ReduceStore<ToplevelStoreState, ToplevelActio
 
     public reduce(oldStoreState : ToplevelStoreState, action: ToplevelAction) : ToplevelStoreState {
         switch (action.type) {
-            case ToplevelActionType.SHOW_TABLE_HEADER_CONTEXT_BUTTON: {
+            case ToplevelActionType.SHOW_TABLE_HEADER_CONTEXT_MENU: {
                 return oldStoreState.updatePortalState(
-                    ToplevelComponentType.TABLE_HEADER_CONTEXT_BUTTON,
-                    {show :true, position: action.data.position}
+                    ToplevelComponentType.TABLE_HEADER_CONTEXT_MENU,
+                    {src: action.src, show :true, position: action.data.position}
                 );
             }
-            case ToplevelActionType.HIDE_TABLE_HEADER_CONTEXT_BUTTON: {
+            case ToplevelActionType.HIDE_TABLE_HEADER_CONTEXT_MENU: {
                 return oldStoreState.updatePortalState(
-                    ToplevelComponentType.TABLE_HEADER_CONTEXT_BUTTON,
-                    {show :true, position: action.data.position}
+                    ToplevelComponentType.TABLE_HEADER_CONTEXT_MENU,
+                    {src: action.src, show :false, position: action.data.position}
                 );
             }
             default: {
@@ -59,5 +59,6 @@ export class ToplevelStore extends ReduceStore<ToplevelStoreState, ToplevelActio
         }
     }
 
-    public static getInstance() : ToplevelStore { return this.instance; }
 }
+
+export default new ToplevelStore(dispatcher);
