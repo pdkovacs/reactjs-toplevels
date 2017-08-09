@@ -8,13 +8,10 @@ const PRODUCTION = process.env.NODE_ENV === 'production';
 
 var nodeExternals = require('webpack-node-externals');
 
-const entry = PRODUCTION
-    ? [ './src/index.tsx' ]
-    : TEST
+const entry = TEST
     ? [ './test/specRoot.js' ]
-    : [ // DEVELOPMENT
-        './src/index.tsx',
-        'webpack-dev-server/client?http://localhost:8080'
+    : [ // PRODUCTION || DEVELOPMENT
+        './src/index.tsx'
     ];
 
 const plugins = PRODUCTION
