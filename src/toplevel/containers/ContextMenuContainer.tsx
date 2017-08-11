@@ -3,7 +3,7 @@ import { Container } from 'flux/utils';
 
 import { ToplevelComponentType } from '../data/ToplevelActionType';
 import store, { ToplevelComponentState, ToplevelStoreState } from '../data/ToplevelStore';
-import { TableHeaderContextMenu } from '../views/TableHeaderContextMenu';
+import { ContextMenu } from '../views/ContextMenu';
 
 class TableHeaderContextMenuContainer extends React.Component<{}, ToplevelComponentState> {
     static getStores() {
@@ -11,11 +11,11 @@ class TableHeaderContextMenuContainer extends React.Component<{}, ToplevelCompon
     }
 
     static calculateState() {
-        return store.getState().getComponentTypeState(ToplevelComponentType.TABLE_HEADER_CONTEXT_MENU);
+        return store.getState().getComponentTypeState(ToplevelComponentType.CONTEXT_MENU);
     }
 
     render() {
-        return <TableHeaderContextMenu  {...this.state}/>;
+        return <ContextMenu  {...this.state}/>;
     }
 }
 

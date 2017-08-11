@@ -1,23 +1,23 @@
-import { ToplevelPosition, ToplevelActionType } from './ToplevelActionType';
+import { ToplevelPosition, ToplevelActionType, ToplevelActionData } from './ToplevelActionType';
 import dispatcher from './ToplevelDispatcher';
 
 export class ToplevelActions {
-    public static showTableHeaderContextMenu(src : HTMLElement, position : ToplevelPosition) {
-        dispatcher.dispatch({
-            src: src,
-            type: ToplevelActionType.SHOW_TABLE_HEADER_CONTEXT_MENU,
+    public static showContextMenu(src : HTMLElement, position : ToplevelPosition, content: JSX.Element) {
+        dispatcher.handleAction({
+            type: ToplevelActionType.SHOW_CONTEXT_MENU,
             data: {
+                sourceComponent: src,
                 position: position,
-                content: {}
+                content: content
             }
         })
     }
 
-    public static hideTableHeaderContextMenu() {
-        dispatcher.dispatch({
-            src: null,
-            type: ToplevelActionType.HIDE_TABLE_HEADER_CONTEXT_MENU,
+    public static hideContextMenu() {
+        dispatcher.handleAction({
+            type: ToplevelActionType.HIDE_CONTEXT_MENU,
             data: {
+                sourceComponent: null,
                 position: null,
                 content: null
             }

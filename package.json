@@ -1,6 +1,6 @@
 {
   "name": "reactjs-toplevels",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "A mechanism to display toplevel components such as context menus, modal dialogue boxes and (non-modal) informational or error message popups.",
   "main": "index.js",
   "scripts": {

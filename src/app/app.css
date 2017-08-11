@@ -41,3 +41,7 @@ button {
 th > div {
     width: 100px;
 }
+
+.sort-ctrl {
+    cursor: pointer;
+}

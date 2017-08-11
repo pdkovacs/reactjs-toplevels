@@ -3,18 +3,18 @@ import * as React from 'react';
 import { ToplevelActions } from '../data/ToplevelActions';
 import { ToplevelComponentState } from '../data/ToplevelStore';
 
-import './table-header-context-menu.css';
+import './context-menu.css';
 
-export class TableHeaderContextMenu extends React.Component<ToplevelComponentState, {}> {
+export class ContextMenu extends React.Component<ToplevelComponentState, {}> {
 
     private peer : HTMLElement;
 
     handleClick = (e : MouseEvent) => {
         // https://stackoverflow.com/a/43851475 -> Type assertion needed here:
-        if ((this.props.src && this.props.src.contains(e.target as Node)) || this.peer.contains(e.target as Node)) {
+        if ((this.props.sourceComponent && this.props.sourceComponent.contains(e.target as Node))) {
             return;
         } else {
-            ToplevelActions.hideTableHeaderContextMenu();
+            ToplevelActions.hideContextMenu();
         }
     }
 
@@ -33,11 +33,10 @@ export class TableHeaderContextMenu extends React.Component<ToplevelComponentSta
             left: this.props.position ? this.props.position.x : 0
         }
         return <div
-                    id = 'table-header-context-menu' style = { style }
+                    id = 'context-menu' style = { style }
                     ref = { (r) => { this.peer = r; }}
                 >
-                    <div>Sort ascending</div>
-                    <div>Sort descending</div>
+                {this.props.content}
                 </div>;
     }
 }

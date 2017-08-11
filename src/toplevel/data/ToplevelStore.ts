@@ -10,9 +10,10 @@ import {
 import dispatcher from './ToplevelDispatcher';
 
 export interface ToplevelComponentState {
-    src  : HTMLElement;
+    sourceComponent  : HTMLElement;
     show : boolean;
     position: ToplevelPosition;
+    content: any;
 }
 
 export class ToplevelStoreState {
@@ -41,16 +42,16 @@ class ToplevelStore extends ReduceStore<ToplevelStoreState, ToplevelAction> {
 
     public reduce(oldStoreState : ToplevelStoreState, action: ToplevelAction) : ToplevelStoreState {
         switch (action.type) {
-            case ToplevelActionType.SHOW_TABLE_HEADER_CONTEXT_MENU: {
+            case ToplevelActionType.SHOW_CONTEXT_MENU: {
                 return oldStoreState.updatePortalState(
-                    ToplevelComponentType.TABLE_HEADER_CONTEXT_MENU,
-                    {src: action.src, show :true, position: action.data.position}
+                    ToplevelComponentType.CONTEXT_MENU,
+                    {show: true, ...action.data}
                 );
             }
-            case ToplevelActionType.HIDE_TABLE_HEADER_CONTEXT_MENU: {
+            case ToplevelActionType.HIDE_CONTEXT_MENU: {
                 return oldStoreState.updatePortalState(
-                    ToplevelComponentType.TABLE_HEADER_CONTEXT_MENU,
-                    {src: action.src, show :false, position: action.data.position}
+                    ToplevelComponentType.CONTEXT_MENU,
+                    {show :false, ...action.data}
                 );
             }
             default: {
